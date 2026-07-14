@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #18181b;
+  --accent-glow: rgba(24, 24, 27, 0.25);
+  --accent-dim: rgba(24, 24, 27, 0.08);
+  --radius: 8px;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  @apply bg-black text-white antialiased;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(161, 161, 170, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(161, 161, 170, 0.35);
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-zinc-950/80 backdrop-blur-xl border border-zinc-900 rounded-xl;
+  }
+
+  .glass-panel-hover {
+    @apply transition-colors duration-200 hover:border-zinc-800;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-colors duration-150;
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.1);
+  }
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium text-sm text-zinc-400 transition-colors duration-150;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+  }
+  .btn-ghost:active {
+    transform: scale(0.97);
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 rounded-lg text-sm text-zinc-100 bg-zinc-900 border border-zinc-800 transition-colors duration-150;
+    outline: none;
+  }
+  .input-field::placeholder {
+    color: #71717a;
+  }
+  .input-field:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+  .input-field:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-dim);
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium transition-colors duration-150 cursor-default;
+  }
+
+  .status-dot {
+    @apply inline-block w-2 h-2 rounded-full;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-zinc-400 transition-colors duration-150 cursor-pointer;
+  }
+  .nav-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+  }
+  .nav-item.active {
+    background: var(--accent-dim);
+    color: var(--accent);
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .spotlight-pulse {
+    animation: spotlightPulse 1.4s ease-in-out infinite;
+    border-radius: 8px;
+  }
+}
+
+@keyframes scanLine {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes spotlightPulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  50% { box-shadow: 0 0 0 6px var(--accent-glow); }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .animate-scan {
+    animation: scanLine 2.4s linear infinite;
+  }
+
+  .animate-blink {
+    animation: blink 1s step-start infinite;
+  }
+}
